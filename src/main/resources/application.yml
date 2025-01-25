@@ -32,7 +32,7 @@ spring:
       ack-mode: record
 
 discord:
-  web-hook-url: https://discord.com/api/webhooks/1259040106921332788/mXjkRk7iuKq3jKf_as--mdWAMrsX8RnWT8s0yJRGy3uph44UJZo6LGAuJnkbrHddhpti
+  web-hook-url: ${DISCORD_WEB_HOOK_URL}
 
 ---
 spring:
@@ -59,7 +59,7 @@ spring:
       ack-mode: record
 
 discord:
-  web-hook-url: https://discord.com/api/webhooks/1259040106921332788/mXjkRk7iuKq3jKf_as--mdWAMrsX8RnWT8s0yJRGy3uph44UJZo6LGAuJnkbrHddhpti
+  web-hook-url: ${DISCORD_WEB_HOOK_URL}
 
 ---
 spring:
@@ -86,4 +86,4 @@ spring:
       ack-mode: record
 
 discord:
-  web-hook-url: https://discord.com/api/webhooks/1259040106921332788/mXjkRk7iuKq3jKf_as--mdWAMrsX8RnWT8s0yJRGy3uph44UJZo6LGAuJnkbrHddhpti
+  web-hook-url: ${DISCORD_WEB_HOOK_URL}
