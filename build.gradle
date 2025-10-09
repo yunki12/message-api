@@ -1,14 +1,15 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.3.2'
-    id 'io.spring.dependency-management' version '1.1.6'
+    id 'org.springframework.boot' version '3.5.6'
+    id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'com.yoongibum'
-version = '0.0.2'
+version = '0.1.0'
 
 java {
-    sourceCompatibility = '17'
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 configurations {
@@ -18,6 +19,7 @@ configurations {
     // 내부 Logback 제외
     all {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+        exclude group: 'commons-logging', module: 'commons-logging'
     }
 }
 
@@ -26,19 +28,27 @@ repositories {
 }
 
 dependencies {
+    // Spring Boot 기본 스타터
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
-    implementation 'org.springframework.kafka:spring-kafka:3.2.2'
 
+    // Kafka (Spring Boot 3.5.x 버전 호환 자동 관리)
+    implementation 'org.springframework.kafka:spring-kafka'
+
+    // Lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-}
 
-configurations.all {
-    exclude group: 'commons-logging', module: 'commons-logging'
+    // 테스트
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+// ✅ bootRun 추가 (VSCode나 CLI에서 바로 실행 가능)
+tasks.named('bootRun') {
+    jvmArgs = ['-Dspring.profiles.active=local']  // 필요 시 다른 프로파일로 변경 가능
 }
